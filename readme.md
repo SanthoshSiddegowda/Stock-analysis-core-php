@@ -31,6 +31,7 @@ If you don't already have an Apache local environment with PHP, use one of the f
 |
 +-- .gitignore
 +-- index.php
++-- readme.md
 +-- result.php
 +-- style.css
 ```

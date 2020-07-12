@@ -29,8 +29,12 @@ function displayContents(contents) {
         clearOptions('stock_name');
 
         alert('Invalid CSV File Uploaded');
+		document.getElementById("submit").disabled = true;
+
     } else {
 
+		document.getElementById("submit").disabled = false;
+		
         clearOptions('stock_name');
 
 		var items = [];

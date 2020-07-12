@@ -90,6 +90,8 @@ class ResultController {
 			$emptyResult = 	1;
 		}
 	
+		$this->_csvArray =  $res;
+		
 		return [
 			'result' => $res,
 			'emptyResult' => $emptyResult

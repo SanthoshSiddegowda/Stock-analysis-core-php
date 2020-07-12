@@ -31,11 +31,11 @@ $calc = (object) $result->calcValues();
 ?>
 <div class="col-md-6 offset-md-3 mt-5">
 	
-	<a target="_blank">
+	<a href="/">
 	  <img src='https://getform.io/_nuxt/img/095d0b3.svg'>
 	</a>
 	<br>
-	<a target="_blank"  class="mt-3 d-flex">Stock Management</a>
+	<a class="mt-3 d-flex" href="/">Stock Management</a>
 	<h1>Result Of Analysed Data	 </h1>
 	
 	<hr>

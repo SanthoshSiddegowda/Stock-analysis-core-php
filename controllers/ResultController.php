@@ -27,15 +27,21 @@ class ResultController {
 		$fileName = 'stock_file_'.strtotime("now").'.csv';
 		$fullPath = $path.$fileName;
 		
+		$filteredArray = [];
+		
+		foreach ($array as $key => $value) {
+			$filteredArray[$key] = array_values(array_filter($value));
+		}
+		
 		$file = fopen($fullPath,"w");
-		foreach ($array as $line)
+		foreach ($filteredArray as $line)
 		{
 		  fputcsv($file, $line);
 		}
 		fclose($file);
 		
 		$this->_csvPath = $fullPath;
-		$this->_csvArray = $array;
+		$this->_csvArray = $filteredArray;
 	}
 	
 	
@@ -83,9 +89,7 @@ class ResultController {
 			$res = $results;
 			$emptyResult = 	1;
 		}
-		
-		$this->_csvArray = $res;
-		
+	
 		return [
 			'result' => $res,
 			'emptyResult' => $emptyResult
@@ -169,8 +173,9 @@ class ResultController {
 		}
 		$size = count($aValues) - 1;
 		
+		
 		$stdDev =  (float) sqrt($fVariance)/sqrt($size);
-	
+		
 		return [
 			'mean' => $fMean,
 			'stdDev' => $stdDev
@@ -197,6 +202,5 @@ class ResultController {
 		];
 		
 	}
-	
-	
+
 }

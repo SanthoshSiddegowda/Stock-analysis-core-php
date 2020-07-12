@@ -31,7 +31,6 @@ If you don't already have an Apache local environment with PHP, use one of the f
 |
 +-- .gitignore
 +-- index.php
-+-- readme.md
 +-- result.php
 +-- style.css
 ```
@@ -49,6 +48,10 @@ If you don't already have an Apache local environment with PHP, use one of the f
 
 For Reference, A dummy CSV file added in the path ``` storage/csv``` . Need to follow Headers of csv with same names in order to use the tool.  
 
+## screenshots
+![homepage](https://i.ibb.co/3RLhkCL/screencapture-localhost-8021-2020-07-13-00-13-52.png)
+![result-1](https://i.ibb.co/YTc46qJ/screencapture-localhost-8021-result-php-2020-07-13-00-14-30-1.png)
+![result-2](https://i.ibb.co/N1RdmqB/screencapture-localhost-8021-result-php-2020-07-13-00-14-03.png)
 ## Reporting Issues
 
 For Issues, you can raise the issue on the repo in the github project. [issue](https://github.com/SanthoshSiddegowda/Stock-Analsys-core-php/issues)

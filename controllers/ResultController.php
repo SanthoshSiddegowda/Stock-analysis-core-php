@@ -141,6 +141,7 @@ class ResultController {
 	public function calcValues(){
 		
 		$price = $this->getArrayKey('price');
+		$date = $this->getArrayKey('date');
 		$aValues = [];
 		
 		foreach ($this->_csvArray as $key => $value)
@@ -197,12 +198,21 @@ class ResultController {
 		
 		$minimumDate = ($this->_csvArray[$minKey][$date]);
 		$maximumDate = ($this->_csvArray[$maxKey][$date]);
+					
+		if(strtotime($minimumDate) > strtotime($maximumDate))
+		{
+			unset($aValues[$minKey]);
+			
+			return $this->lossProfit($aValues);
+				
+		}
 		
 		return [
 			'maximumDate' => $maximumDate,
 			'minimumDate' => $minimumDate
 		];
-		
+	
+			
 	}
 
 }

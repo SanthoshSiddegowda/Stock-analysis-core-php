@@ -36,7 +36,7 @@ $calc = (object) $result->calcValues();
 	</a>
 	<br>
 	<a class="mt-3 d-flex" href="/">Stock Management</a>
-	<h1>Result Of Analysed Data	 </h1>
+	<h1>Result Of Analysed Data	 of <?php echo "'".$res->stockName."'" ?></h1>
 	
 	<hr>
 	
@@ -65,16 +65,23 @@ $calc = (object) $result->calcValues();
   	</div>
 	
 	<div class="form-group row">
-	    <label for="" class="col-sm-4 col-form-label">Best Date to sell Shares</label>
+	    <label for="" class="col-sm-4 col-form-label">Best Date to buy Shares</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control" id="mean_value" value="<?php echo  $calc->maximumDate ?>" placeholder="Mean Value" disabled>
+	      <input type="text" class="form-control" id="mean_value" value="<?php echo  $calc->minimumDate ?>" placeholder="" disabled>
 	    </div>
   	</div>
 	
 	<div class="form-group row">
-	    <label for="" class="col-sm-4 col-form-label">Best Date to buy Shares</label>
+	    <label for="" class="col-sm-4 col-form-label">Best Date to sell Shares</label>
 	    <div class="col-sm-8">
-	      <input type="text" class="form-control" id="mean_value" value="<?php echo  $calc->minimumDate ?>" placeholder="Mean Value" disabled>
+	      <input type="text" class="form-control" id="mean_value" value="<?php echo  $calc->maximumDate ?>" placeholder="" disabled>
+	    </div>
+  	</div>
+	
+	<div class="form-group row">
+	    <label for="" class="col-sm-4 col-form-label">Maximum Profit</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" id="mean_value" value="<?php echo  $calc->maxDiff ?>" placeholder="" disabled>
 	    </div>
   	</div>
 		

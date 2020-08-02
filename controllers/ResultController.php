@@ -94,7 +94,8 @@ class ResultController {
 		
 		return [
 			'result' => $res,
-			'emptyResult' => $emptyResult
+			'emptyResult' => $emptyResult,
+			'stockName' =>$this->_stockName
 		];
 		
 	}
@@ -102,7 +103,7 @@ class ResultController {
 	
 	private function filterDateRange($array){
 		
-		$startDate= strtotime($this->_startDate);
+		$startDate= strtotime($this->_startDate. ' -1 day');
 		$endDate = strtotime($this->_endDate);
 		
 		$key = $this->getArrayKey('date');
@@ -144,12 +145,14 @@ class ResultController {
 		$date = $this->getArrayKey('date');
 		$aValues = [];
 		
+		usort($this->_csvArray, function($a, $b) {
+			  $date = $this->getArrayKey('date');
+			  return ($a[$date] < $b[$date]) ? -1 : 1;
+			});
+		
 		foreach ($this->_csvArray as $key => $value)
 		{
-			if($key != 0)
-			{
-				$aValues[$key] = $value[$price];
-			}
+			$aValues[$key] = $value[$price];
 		}
 		
 		$stdDev= $this->meanStdDev($aValues);
@@ -158,6 +161,7 @@ class ResultController {
 		return [
 			'maximumDate' => $lossProfit['maximumDate'],
 			'minimumDate' => $lossProfit['minimumDate'],
+			'maxDiff' => $lossProfit['maxDiff'],
 			'mean' => $stdDev['mean'],
 			'stdDev' => $stdDev['stdDev']
 		];
@@ -188,31 +192,66 @@ class ResultController {
 	
 	public function lossProfit($aValues){
 		
-		$min = min($aValues);
-		$max = max($aValues);
-		
-		$minKey = array_search($min,$aValues);
-		$maxKey = array_search($max,$aValues);
+		$calculated = $this->maxDiff($aValues,sizeof($aValues));
 		
 		$date = $this->getArrayKey('date');
 		
-		$minimumDate = ($this->_csvArray[$minKey][$date]);
-		$maximumDate = ($this->_csvArray[$maxKey][$date]);
-					
-		if(strtotime($minimumDate) > strtotime($maximumDate))
-		{
-			unset($aValues[$minKey]);
-			
-			return $this->lossProfit($aValues);
-				
-		}
+		$minimumDate = ($this->_csvArray[$calculated['minValue']][$date]);
+		$maximumDate = ($this->_csvArray[$calculated['maxValue']][$date]);
 		
 		return [
 			'maximumDate' => $maximumDate,
-			'minimumDate' => $minimumDate
+			'minimumDate' => $minimumDate,
+			'maxDiff' => $calculated['maxDiff']
 		];
 	
+	}
+	
+	function maxDiff($arr, $arr_size)
+	{
+	
+	if($arr_size == 1)
+	{
+		$maxValue = key($arr);
+		$minValue = key($arr);
+		
+		return [
+			'maxValue' => $maxValue,
+			'minValue' => $minValue,
+			'maxDiff' => 0
+		];
+	}
+	
+	$firstValue = current($arr);
+	$secondValue = current(array_slice($arr, 1, 1));
+	$maxDiff = $secondValue - $firstValue;
+	$maxValue = key($arr)+1;
+	$minValue = key($arr);
+	
+	
+	foreach ($arr as $key => $value)
+	{
+		if(is_numeric($value))
+		{
+			for ($j = $key+1; $j < $arr_size; $j++)
+		    {
+			    if ($arr[$j] - $arr[$key] > $maxDiff)
+				{
+					$maxValue = $j;
+			        $minValue = $key;
+			        $maxDiff = $arr[$j] - $arr[$key];
+				}
+			}
 			
+		}
+	}
+		
+	return [
+		'maxValue' => $maxValue,
+		'minValue' => $minValue,
+		'maxDiff' => $maxDiff
+	];
+
 	}
 
 }

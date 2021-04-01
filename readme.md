@@ -4,7 +4,7 @@ Stock market analyser is the web tool which collects the data from csv uploaded.
 
 ## Prerequisites
 
-If you don't already have an Apache local environment with PHP, use one of the following links:
+If you don't  have an Apache local environment with PHP, use one of the following links:
 
  - Windows: https://updivision.com/blog/post/beginner-s-guide-to-setting-up-your-local-development-environment-on-windows
  - Linux: https://howtoubuntu.org/how-to-install-lamp-on-ubuntu

@@ -32,7 +32,7 @@ $calc = (object) $result->calcValues();
 <div class="col-md-6 offset-md-3 mt-5">
 	
 	<a href="/">
-	  <img src='https://getform.io/_nuxt/img/095d0b3.svg'>
+	  <img src='/storage/images/icon.jpeg' width="69">
 	</a>
 	<br>
 	<a class="mt-3 d-flex" href="/">Stock Management</a>

@@ -152,6 +152,9 @@ class ResultController {
 		
 		foreach ($this->_csvArray as $key => $value)
 		{
+			if( !is_numeric($value[$price]) ){
+				continue;
+			}
 			$aValues[$key] = $value[$price];
 		}
 		
@@ -168,7 +171,7 @@ class ResultController {
 	}
 	
 	public function meanStdDev($aValues){
-		
+
 		$fMean = array_sum($aValues) / count($aValues);
 		
 		$fVariance = 0.0;
